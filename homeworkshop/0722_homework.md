@@ -37,3 +37,14 @@ def get_middle_char(word):
 None
 
 함수에 리턴값이 존재하지 않습니다.
+
+
+
+### 5. 가변인자 리스트
+
+```python
+def my_avg(*args):
+    return sum(args)/len(args)
+
+```
+
