@@ -26,8 +26,8 @@ __str__ : 특정 객체를 출력(print()) 할 때 보여줄 내용을 정의할
 
 ### 3. Instance Method
 
-- append() : 리스트 뒤에 데이터를 추가
-- .join() : 리스트를 seperate를 기준으로 합쳐서 문자열로 배출   
+- .append(x) : 리스트 뒤에 데이터를 추가
+- ' seperate'.join() : 리스트를 seperate를 기준으로 합쳐서 문자열로 배출   
 
 - .remove(x) : 리스트에서 x를 제거한다. x가 없으면 오류 반환
 
