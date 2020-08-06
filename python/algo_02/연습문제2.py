@@ -43,6 +43,7 @@ for i in range(1<<len(arr)):
     for j in range(len(arr)): #체크 해야할 인자들
         # j = 0 1 2
         if i & 1<<j:
+            print(i , j)
             temp.append(arr[j])
     print(temp)
 
