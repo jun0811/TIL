@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>google-form</title>
+    <style>
+        .title{
+            color: yellowgreen
+        }
+        #name{
+            color: red
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="https://www.ssafy.com">
+            <img src="ssafy.png" alt="ssafy logo">
+        </a>
+        <!-- html에 css를 적용하기 위해서는 selector를 사용한다 -->
+        <!-- 선택자는 태그의 이름, 아이디(#), 또는 클래스를 사용한다 -->
+        <!-- 클래스 선택자는 ".클래스명"형태로 사용한다 -->
+        <!-- 아이디 선택자는 "#아이디명" 형태로 사용한다 -->
+        <h1 class="title">ssafy 4기</h1>
+        <h1>학생</h1>
+        <h2>학생</h2>    
+    </header>
+    <section>
+        <form action="#">
+        <div>
+            <label for="name">이름을 기재해주세요</label>
+            <input type="text" id="name" autofocus>    
+        </div>
+        <hr>
+        <div>
+            <section name ="" id ="">
+                <option value="">선택</option>
+                <option value="서울">서울</option>
+                <option value="광주">광주</option>
+                <option value="대전">대전</option>
+                <option value="구미" disabled>구미</option>
+                
+            </section>
+        </div>
+        <hr>
+        <div>
+            <p>오늘의 체온을 선택해주세요</p>
+            <input type="radio" id = 'normal' name= 'body' value="normal" checked>
+            <label for="normal">37.5도 미만</label>
+            
+            <input type="radio" id = 'normal' name= 'body' value="warning">
+            <label for="warning">37.5도 이상</label>
+        </div>
+        <input type="submit" value="제출버튼">
+        </form>
+    </section>
+    <hr>
+
+    <footer>
+        google 설문지를 통해 비밀번호를 제출하지 마세여
+    </footer>
+</body>
+</html>
