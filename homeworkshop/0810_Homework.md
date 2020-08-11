@@ -46,4 +46,4 @@ Cascading Style Sheet)
 
 ### 5. 우선순위
 
-!important  > inline style > id 선택자 > class 선택자 > 요소 선택자 > 소스 순서
+!important  > inline style > id 선택자 > class 선택자 > 요소 선택자 > 소스 순서 > 상속 
