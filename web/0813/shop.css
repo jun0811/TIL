@@ -1,0 +1,22 @@
+/* 아래에 코드를 작성하시오. */
+.container {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.container > .row {
+  padding: 1.5rem;
+}
+
+item{
+  border : 1px solid gray
+}
+
+.navigation{
+  position: fixed;
+  background-color: antiquewhite;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 10px;
+}
