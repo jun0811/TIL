@@ -76,6 +76,10 @@ def catch(request):
         "username" : username
     }
     return render(request,'articles/catch.html',context)
+
+
+# app -> templates 생성후 -> articles -> 'xx.html'
+# 이것을 해주는 이유는 
 ```
 
 

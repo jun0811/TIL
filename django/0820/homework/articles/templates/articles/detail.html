@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <br>
+  
+  <h3>제목: {{article.title}}</h3>
+  <h4>내용: {{article.content}}</h4>
+  <p>작성일: {{article.created_at}}</p>
+  <br>
+  <p>수정일: {{article.updated_at}}</p>
+
+  <a href="{%url 'articles:edit'%}">EDIT</a>
+  <a href="">DELETE</a>
+  <br>
+  <a href="{%url 'articles:index'%}">BACK</a>
+{% endblock  %}
