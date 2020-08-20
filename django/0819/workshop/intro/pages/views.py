@@ -10,13 +10,7 @@ def card(request):
     ['test title5', 'test content5'],
     ]
     context = {
-        'articles' : {
-        articles[0][0] : articles[0][1],
-        articles[1][0] : articles[1][1],
-        articles[2][0] : articles[2][1],
-        articles[3][0] : articles[3][1],
-        articles[4][0] : articles[4][1],
-        }
+        'articles' : articles
     }
     return render(request, 'card.html', context)
 

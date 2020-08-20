@@ -85,13 +85,7 @@ def card(request):
     ['test title5', 'test content5'],
     ]
     context = {
-        'articles' : {
-        articles[0][0] : articles[0][1],
-        articles[1][0] : articles[1][1],
-        articles[2][0] : articles[2][1],
-        articles[3][0] : articles[3][1],
-        articles[4][0] : articles[4][1],
-        }
+        'articles' : articles
     }
     return render(request, 'card.html', context)
 
@@ -173,13 +167,13 @@ def community(request):
 
 {% block content %}
   <div class="row">
-    {% for x,y in articles.items%}
-    <div class="card col-4" style="width: 18rem;">
+    {% for article in articles%}
+    <div class="card col-4">
     <img class="card-img-top" src="https://picsum.photos/200/300" alt="Card image cap">
     <div class="card-body">
      
-      <h5 class="card-title">{{x}}</h5>
-      <p class="card-text">{{y}}</p>
+      <h5 class="card-title">{{article.0}}</h5>
+      <p class="card-text">{{article.1}}</p>
 
       <a href="#" class="btn btn-primary">Post Article</a>
     </div>
