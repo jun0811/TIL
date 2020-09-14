@@ -61,11 +61,30 @@ $ pip install django
 
 > 게시글을 저장하기 위한 테이블을 만든다고 가정합니다.
 
-- [ ] 모델 정의
-- [ ] 마이그레이션 작업
-  - [ ] 마이그레이션 파일 생성
-  - [ ] 마이그레이션 DB 반영
-  - [ ] 마이그레이션 DB 반영 확인
+- [x] 모델 정의
+
+``` python
+# models.py
+from django.db import models
+
+# Create your models here.
+class Article(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+```
+
+- [x] 마이그레이션 작업
+  - [x] 마이그레이션 파일 생성
+  - [x] 마이그레이션 DB 반영
+  - [x] 마이그레이션 DB 반영 확인
+
+```bash
+$ python manage.py makemigrations
+$ python manage.py migratep
+$ python manage.py showmigrations
+```
 
 
 
@@ -75,10 +94,10 @@ $ pip install django
 >
 > 기억을 더듬어보며 하나씩 구현해봅니다.
 
-- [ ] 프로젝트 url 작성
-- [ ] 앱 url 작성
-  - [ ] path 함수
-  - [ ] view 함수 설정 
+- [x] 프로젝트 url 작성
+- [x] 앱 url 작성
+  - [x] path 함수
+  - [x] view 함수 설정 
   - [ ] name 속성 설정
   - [ ] ❓🤔❓
 - [ ] view 함수 작성
