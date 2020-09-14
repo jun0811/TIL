@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Article
+from .forms import ArticleForm
+
 # Create your views here.
 def index(request):
     articles = Article.objects.all()[::-1]
@@ -20,6 +22,7 @@ def create(request):
     title = request.POST.get('title')
     content = request.POST.get('content')
     
+    # 2. 데이터
     article = Article()
     article.title = title
     article.content = content

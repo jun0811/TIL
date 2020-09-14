@@ -1,0 +1,12 @@
+[
+{
+    "model": "articles.article",
+    "pk": 7,
+    "fields": {
+        "title": "제목",
+        "content": "내용    ",
+        "create_at": "2020-08-20T23:15:49.260Z",
+        "update_at": "2020-08-20T23:15:49.260Z"
+    }
+}
+]
