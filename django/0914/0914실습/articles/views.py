@@ -27,7 +27,7 @@ def create(request):
     # 1. POST 요청이면 폼 데이터를 처리한다.
     if request.method == 'POST':
         # 2. 폼의 인스턴스를 생성하고 사용자가 보낸 데이터로 폼을 채운다. (binding)
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         # 3. 폼에 담긴 데이터가 유효한지 검사한다.
         if form.is_valid(): # 유효성검사
             form.save()
@@ -72,7 +72,7 @@ def delete(request, article_pk):
 def update(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     if request.method == 'POST':
-        form = ArticleForm(request.POST, instance=article)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             form.save()
             return redirect('articles:detail', article_pk)

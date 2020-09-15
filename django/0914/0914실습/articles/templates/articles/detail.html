@@ -4,6 +4,9 @@
 <h1>DETAIL {{ article.pk}}번째 글</h1>
 
 <h2>{{ article.title}}</h2>
+  {% if article.image %}
+   <img src="{{article.image.url}}" alt="{{article.image}}">
+  {% endif %}
 <p>{{ article.content }}</p>
 
 {% comment %} <a href="{% url 'articles:delete' article.pk %}">[DELETE]</a> {% endcomment %}

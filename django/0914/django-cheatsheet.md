@@ -8,21 +8,29 @@
 
 - [x] 가상환경 생성하기
 
-```bash
-$ python -m venv venv
-```
+  ```bash
+  $ python -m venv venv
+  ```
 
 - [x] 가상환경 실행하기
 
-```bash
-$ source venv/Scripts/activate          
-```
+  ```bash
+  $ source venv/Scripts/activate
+  ```
+
+- [x] inter
+
+  ctrl+shift+p -> python: selecet interpreter-> venv 선택
+
+  pip list 쳐보기
 
 - [x] Django 설치하기
 
-```bash
-$ pip install django
-```
+  ```bash
+  $ pip install django
+  ```
+
+  
 
 
 
@@ -40,51 +48,54 @@ $ pip install django
   $ python manage.py startapp articles
   ```
 
-- [x] **❓🤔❓**
+- [ ] **❓🤔❓** 
 
-  ```
-  settings.py : 앱등록 
-  ```
+  `settings.py`에 `app `등록
 
-- [x] 언어 및 시간 설정
+- [ ] 언어 및 시간 설정
 
-  ```
-  settings.py
-  LANGUAGE_CODE = 'ko-kr'
-  
-  TIME_ZONE = 'Asia/Seoul'
-  ```
+  `settings.py`에서 LANGUAGE_CODE(ko-KR)와 TIME_ZONE(Asia/Seoul) 설정
 
-  
+
 
 ## 2. 모델 정의 및 DB 반영
 
 > 게시글을 저장하기 위한 테이블을 만든다고 가정합니다.
 
-- [x] 모델 정의
+- [ ] 모델 정의
 
-``` python
-# models.py
-from django.db import models
+  articles폴더의 models.py에서 정의
 
-# Create your models here.
-class Article(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-```
+  ```python
+  class Article(models.Model):
+      title = models.CharField(max_length=255)
+      content = models.TextField()
+      created_at = models.DateTimeField(auto_now_add=True)
+      updated_at = models.DateTimeField(auto_now=True)
+  ```
+  
 
-- [x] 마이그레이션 작업
-  - [x] 마이그레이션 파일 생성
-  - [x] 마이그레이션 DB 반영
-  - [x] 마이그레이션 DB 반영 확인
+  
+- [ ] 마이그레이션 작업
+  - [ ] 마이그레이션 파일 생성
 
-```bash
-$ python manage.py makemigrations
-$ python manage.py migratep
-$ python manage.py showmigrations
-```
+    ```bash
+    $ python manage.py makemigrations
+    ```
+
+  - [ ] 마이그레이션 DB 반영
+
+    ```bash
+    $ python manage.py migrate
+    ```
+
+  - [ ] 마이그레이션 DB 반영 확인
+
+    ```bash
+    $ python manage.py showmigrations
+    ```
+
+    
 
 
 
@@ -94,22 +105,58 @@ $ python manage.py showmigrations
 >
 > 기억을 더듬어보며 하나씩 구현해봅니다.
 
-- [x] 프로젝트 url 작성
-- [x] 앱 url 작성
-  - [x] path 함수
-  - [x] view 함수 설정 
+- [ ] 프로젝트 url 작성
+
+  ```python
+  from django.contrib import admin
+  from django.urls import path, include
+  
+  urlpatterns = [
+      # http://localhost:8000/articles/
+      path('articles/', include('articles.urls')),
+      path('admin/', admin.site.urls),
+  ]
+  ```
+
+- [ ] 앱 url 작성
+
+  - [ ] path 함수
+
+  - [ ] view 함수 설정 
+
   - [ ] name 속성 설정
+
   - [ ] ❓🤔❓
+
+    articles/urls.py에서 앱네임 설정
+
+    ```python
+    app_name = 'articles'
+    ```
+
+    
+
 - [ ] view 함수 작성
   - [ ] 모든 게시글 가져오기
   - [ ] 가져온 모든 게시글 template에 넘겨주기
+  
 - [ ] template 작성
-  - [ ] ❓🤔❓
+  - [ ] ❓🤔❓  => `settings.py`에서 `'DIRS'`설정해주기
+  
+    ```python
+    'DIRS': [BASE_DIR / 'templates'],
+    ```
+  
   - [ ] base.html 작성
+  
   - [ ] index.html 작성
+  
   - [ ] 모든 게시글 보여주기 (ORM 활용)
+    
     - [ ] ❓🤔❓
+  
 - [ ] (challenge) 디테일 페이지 만들기
+  
   - [ ] ❓🤔❓
 
 

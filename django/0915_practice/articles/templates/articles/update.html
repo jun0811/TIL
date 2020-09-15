@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit</h2>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <button>submit</button>
+  {% comment %} <a href="{% url 'articles:detail' article.pk %}">BACK</a> {% endcomment %}
+</form>
+ <a href="{% url 'articles:detail' form.instance.pk %}">[back]</a>
+
+{% endblock content %}
