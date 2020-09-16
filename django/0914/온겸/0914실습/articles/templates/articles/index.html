@@ -13,7 +13,7 @@
   <img width="400" height="auto" src="{% static 'articles/images/coffee.jpg' %}" alt="coffee pic">
 <h1>Index Page</h1>
 <a href="{% url 'articles:create' %}">게시글 작성하기</a>
-
+  
 <!-- 게시글 목록 시작-->
 {% for article in articles %}
   <h2>{{ article.title}}</h2>
