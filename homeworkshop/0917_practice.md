@@ -22,7 +22,7 @@ def signup(request):
     return render(request, 'accounts/signup.html', context)
 ```
 
-![](0917_practice.assets/create-1600327741228.PNG)
+![](0917_practice.assets/create-1600330312763.PNG)
 
 ### 2. Login
 
@@ -45,7 +45,7 @@ def login(request):
     return render(request, 'accounts/login.html', context)
 ```
 
-![](0917_practice.assets/login2.PNG)
+![](0917_practice.assets/login2-1600330334427.PNG)
 
 ### 3. Logout
 
@@ -56,7 +56,7 @@ def logout(request):
     return redirect('accounts:user_list')
 ```
 
-
+![](0917_practice.assets/login-1600330401993.PNG)
 
 ### 4. User Update
 
@@ -78,7 +78,7 @@ def update(request):
     return render(request, 'accounts/update.html',context)
 ```
 
-![](0917_practice.assets/userupdate.PNG)
+![](0917_practice.assets/userupdate-1600330359813.PNG)
 
 
 
