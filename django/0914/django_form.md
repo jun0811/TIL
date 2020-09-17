@@ -744,6 +744,7 @@ class ArticleForm(forms.ModelForm): # form tag
       article = Article.objects.get(pk=pk)
       article.delete()
       return redirect('articles:index')
+  ```
 ```
   
   - url 로 delete 시도 후 405 에러페이지 & terminal 로그 확인하기
@@ -764,7 +765,7 @@ class ArticleForm(forms.ModelForm): # form tag
 
 - base.html 수정
 
-```html
+​```html
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">

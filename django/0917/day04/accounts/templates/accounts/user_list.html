@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">유저 목록</h1>
+<hr>
+
+<!-- 메세지 시작-->
+{% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
+{% endif %}
+
+<!-- 메세지 종료-->
+{% for user in users%}
+  <h3>{{ user.pk }} 번 유저</h3>
+  <h4>{{ user.username }}</h4>
+  <hr>
+{% endfor %}
+
+{% endblock content %}

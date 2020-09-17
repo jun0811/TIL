@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 def signup(request): # id create
     '''
     1. 회원가입 작성 페이지
-    2. 회원가입 로직 (POST) 
+    2. 회원가입 로직 (POST)
     '''
     if request.user.is_authenticated:
         return redirect('articles:index')
@@ -80,5 +80,5 @@ def users(request):
     context = {
         'user_list': user_list,
     }
-    print(context)
+    # print(context)
     return render(request, 'accounts/users.html', context)

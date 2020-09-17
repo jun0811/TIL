@@ -8,4 +8,4 @@ class CustomUserChangeForm(UserChangeForm):
     # 필드가 다보여서 부분적으로  
     class Meta:
         model = User
-        fields = ('first_name' , 'last_name', 'email')
+        fields = ('first_name' , 'last_name', 'email',)
