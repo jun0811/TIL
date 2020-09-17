@@ -20,4 +20,4 @@ def password_update(request):
     return render(request, 'accounts/password_update.html', context)
 ```
 
-![](C:\Users\d\Desktop\1.PNG)
+![](0917_workshop.assets/1.PNG)
