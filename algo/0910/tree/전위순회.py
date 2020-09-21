@@ -25,16 +25,24 @@ tree = [[0] * 3 for _ in range(V + 1)]
 temp = list(map(int, input().split()))
 cnt = 0
 # tree 저장
-for i in range(E):
-    p, c = temp[i*2], temp[i*2+1]
-    if tree[p][0] == 0: # 왼쪽부터 채우기
-        tree[p][0] = c
-    else:
-        tree[p][1] = c
-    tree[c][2] = p
+# for i in range(E):
+#     p, c = temp[i*2], temp[i*2+1]
+#     if tree[p][0] == 0: # 왼쪽부터 채우기
+#         tree[p][0] = c
+#     else:
+#         tree[p][1] = c
+#     tree[c][2] = p
 
 # for t in tree:
 #     print(*t)
 
 preorder(1)
 print(cnt)
+
+for i in range(E):
+    p,c = temp[i*2] , temp[i*2+1]
+    if tree[p][0] == 0:
+        tree[p][0] = c
+    else:
+        tree[p][1] = c
+    tree[c][2] = p

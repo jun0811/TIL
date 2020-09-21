@@ -27,7 +27,6 @@ for i in range(14):
 while len(result)< 3:
     result += result
 
-                    
 
 answer = result
 print(answer)

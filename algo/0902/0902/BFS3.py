@@ -4,7 +4,6 @@
 '''
 def bfs(v):
     Q = []
-
     #endQ
     Q.append(v)
     visit[v] = 1

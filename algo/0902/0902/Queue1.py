@@ -24,12 +24,12 @@ def Qpeek():
     else:
         return Q[front+1]
 
+
 enQueue(1)
 enQueue(2)
-enQueue(3)
+enQueue(3)                      
 print(Qpeek())
 print(deQueue())
 print(deQueue())
-print(deQueue())
-print(deQueue())
+print(deQueue())                  
 # 실제 값(Q)은 안지워지고 가리키는 곳이 달라지는 것임.
