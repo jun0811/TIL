@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>VOTE</h2>
+  <hr>
+  <p>주제 : {{ article.title }}</p>
+  <p>항목 1 : {{ article.content1 }}</p>
+  <p>항목 2 : {{ article.content2 }}</p>
+  <hr>
+  <h4>댓글 목록</h4>
+  {% if comments|length %}
+    <p>{{ comments|length }} 개의 댓글이 있습니다.</p>
+  {% endif %}
+  {% for comment in comments %}
+    <li>
+      {{ comment.content }}
+    </li>
+  {% empty %}
+    <p>댓글이 아직 없다</p>
+  {% endfor %}
+  <hr>
+  <h4>댓글 작성</h4>
+  <form action="#" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <select name="sel" id="" >
+    <option value="{{ articles.content1 }}">{{ articles.content1 }}</option>
+    <option value="{{ articles.content2 }}">{{ articles.content2 }}</option>
+    </select>
+    <input type="submit">
+  </form>
+{% endblock content %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>MAIN PAGE</h1>
+<br>
+<a href="{% url 'articles:votecreate'%}">create</a>
+<br>
+<a href="{%url 'articles:randompage'%}">random</a>
+{% endblock  %}
+
