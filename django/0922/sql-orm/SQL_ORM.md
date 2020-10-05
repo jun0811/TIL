@@ -237,7 +237,7 @@ TIL
    # orm
    User.objects.filter(age=30, last_name = '김').count()
    # from django.db.models import Q
-   # User.objects.filter(
+   # User.objects.filter()
    # Q(age=30) | Q(last_name = '김'))
    ```
 
@@ -408,13 +408,14 @@ TIL
    # orm
    from django.db.models import Max
    User.objects.aggregate(Max('balace'))
+   ```
 ```
    
    ```sql
    -- sql
    SELECT MAX(balance) from users_user;
-      ```
-   
+```
+
 5. 계좌 잔액 총액
 
    ```python
