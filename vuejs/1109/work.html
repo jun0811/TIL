@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunch & Lotto</title>
+</head>
+<body>
+  <div id = 'app'>
+    <h2>점심 메뉴</h2>
+    <button @click='onePick'> pick one</button>
+    <p v-model="result1">{{result1[0]}}</p>
+  </div>
+
+
+  <hr>
+  <div id = 'app'>
+    <h2>점심 메뉴</h2>
+    <button @click='onPick'> pick one</button>
+    <p v-model="result1">{{result1}}</p>
+  </div>
+
+  <hr>
+  <div id ='lotto'>
+    <button @click = 'onPick'>Get lucky</button>
+    <p v-model="result2"></p>{{result2}}</p>
+  </div>
+
+  <script src= "https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script>
+    const app = new Vue ({
+      el : '#app',
+      data: {
+        menu : ['피자', '국밥', '라면', '만두'],
+        result1 : "",
+      },
+      methods : {
+        onePick (){ // onePick() == onePick: function(){}
+          // 1. menu 배열 길이 안에서 인덱스를 무작위로 뽑느다. 
+          const n = _.random(this.menu.length-1)
+          this.menu = this.menu[n]
+          // 2. 뽑은 인덱스를 통해 menu값을 가져온 후 결과값에 담는다
+      }
+    }})
+
+    const lotto = new Vue ({
+      el : '#lotto',
+      data :{
+        numbers : _.range(1,46),
+        result2 : ""
+      },
+      
+    methods : {
+      onPick: function(){
+        this.result2 = _.sampleSize(this.numbers,6)
+        // console.log(this.result2)
+      } 
+    }
+    })
+  </script>
+</body>
+</html>

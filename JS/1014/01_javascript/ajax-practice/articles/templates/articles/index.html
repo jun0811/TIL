@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Articles</h1>
+  <a href="{% url 'articles:create' %}">NEW</a>
+  <hr>
+  {% for article in articles %}
+    <p><b>작성자 : <a href="{% url 'accounts:profile' article.user.username %}">{{ article.user }}</a></b></p>
+    <p>글 번호: {{ article.pk }}</p>
+    <p>글 제목: {{ article.title }}</p>
+    <p>글 내용: {{ article.content }}</p>
+    <form class="d-inline like-form " data-article-id="{{article.pk}}">
+      {% csrf_token %}
+      {% if user in article.like_users.all %}
+        <button class="btn btn-link">
+          <i class="fas fa-heart fa-lg" style="color:crimson;"></i>
+        </button>
+      {% else %}
+        <button class="btn btn-link">
+          <i class="fas fa-heart fa-lg" style="color:black;"></i>
+        </button>
+      {% endif %}
+    </form>
+    {{ article.like_users.all|length }} 명이 이 글을 좋아합니다.<br>
+    <a href="{% url 'articles:detail' article.pk %}">[detail]</a>
+    <hr>
+  {% endfor %}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const likeForm = document.querySelectorAll(".like-form")
+    likeForm.forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault() // 안해주면 디폴트로 인해 바뀌지 않음
+        const articleId = event.target.dataset.articleId
+        const csrftoken = document.querySelector('{name=csrfmiddlewaretoken}')
+        axios.post(`http://127.0.0.1:8000/articles/${articleId}/like/`).value //  마지막 슬래쉬 필수 
+        // 이렇게 하면 403에러 -> 토큰 필요 
+        
+      })
+    })
+  </script>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    /*
+      1. async - await 예시
+      - 함수 앞에 반드시 async가 붙어있어야한다.
+    */
+
+    async function fetchTodo(){
+      const res = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
+      // const res = await axios.get('https://jsonplaceholder.typicode.com/todos/2')
+      // console.log(res)
+    } 
+    fetchTodo()
+  
+    /*
+     2. 비동기 요청을 여러개 보낼 경우
+    */
+   // 2-1. 문제상황 -> 순서 보장 x
+    const request = [
+    'https://jsonplaceholder.typicode.com/todos/1',
+    'https://jsonplaceholder.typicode.com/todos/2',
+    'https://jsonplaceholder.typicode.com/todos/3'
+    ]
+  
+    // request.forEach( url => {
+    //   axios.get(url)
+    //     .then(res => {
+    //       console.log(res.data.title)
+    //     })
+    // })
+    
+    async function fetchTodosIndOrder(request){
+      const promises = []
+
+      request.forEach( url => {
+        const promise = axios.get(url)
+        promises.push(promise)
+      })
+
+      Promise.all(promises)
+        .then(responses => {
+          console.log(responses.data)
+        })
+    }
+    fetchTodosIndOrder(request)
+  </script>
+</body>
+</html>

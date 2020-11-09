@@ -1,0 +1,63 @@
+<div class="jumbotron text-center text-white bg-dark">
+  <p class="lead mb-1">작성자 정보</p>
+  <h1 class="display-4">{{ person.username }}</h1>
+  <hr>
+  {% with followings=person.followings.all followers=person.followers.all %}
+    <p id ='follow-cnt' class="lead">
+      팔로잉 : {{ followings|length }} / 팔로워 : {{ followers|length }}
+    </p>
+    <!-- 팔로우 버튼 -->
+    {% if request.user != person %}
+      <form action="{% url 'accounts:follow' person.pk %}" data-personId = "{{person.pk}}" 
+      id = "follow_form" method="POST" >
+        {% csrf_token %}
+        {% if request.user in followers %}
+          <button class="btn-secondary btn-lg " role="button">Unfollow</button>
+        {% else %}
+          <button class="btn-primary btn-lg" role="button">Follow</button>
+        {% endif %}
+      </form>
+    {% endif %}
+  {% endwith %}
+</div>
+
+{% block script %}
+  <script>
+    // follow 버튼을 클릭하면 색이 변하고 숫자가 증가한다.
+    // 1. follow를 클릭 (이벤트)
+    // 2. 버튼의 색이 변함 (결과)
+    // 3. 숫자가 변함 (결과)
+    const followBtn = document.querySelector('#follow_form')
+    const personId = followBtn.dataset.personid
+    // console.log(personId)
+    followBtn.addEventListener('submit', function (e) {
+      e.preventDefault()
+  
+      // 서버로 요청
+      // console.log("here")
+      const API_URL = `/accounts/follow/${personId}/`
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value
+      const config = { headers: {'X-CSRFToken': csrfToken}}
+      // const API_URL = `/accounts/follow/{{person.pk}}/` // 위줄과 동일 DTL 가능 
+      axios.post(API_URL, {} , config)
+        .then(res => { // res 안에 객체가 있다.
+          // const { u}
+          const { is_followed, follower_count, following_count, user_pk } = res.data
+          // console.log(res.data)
+          // 버튼 가져와서 바꿔주기
+          const followBtn = document.querySelector('#follow_form > button')
+          //
+          followBtn.classList.toggle('btn-primary')
+          followBtn.classList.toggle('btn-secondary')
+          //classList.toggle(): 클래스값이 있는지 체크하고 없으면 더하고 있으면 제거한다
+          followBtn.innerText = is_followed ? 'Unfollow'  : 'Follow'
+
+          const followCount = document.querySelector('#follow-cnt')
+          followCount.innerText = `팔로윙 : ${following_count} / 팔로워 : ${follower_count}`
+        })
+          .catch(err =>{
+          console.error(err)
+        })
+      })
+  </script>
+{% endblock %}

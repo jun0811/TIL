@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7. Vue v-model</title>
+</head>
+<body>
+  <div id="app">
+    <h2>1. Input -> Data</h2>
+    <h3>{{mymessage}}</h3>
+    <input type="text " @keyup= "onInputChange">
+    <hr>
+    <h2>1-2. Input <-> Data</h2>
+    <h3>{{mymessage2}}</h3>
+    <hr>
+
+
+    <!-- 양방향연결 -->
+    <h2>2. Input <-> Data</h2> 
+    <h3>{{mymessage3}}</h3>
+    <input type="text " v-model="mymessage3" >
+
+    <hr>
+    <!-- 직접 찾아보기~ : 체크박스/라디오버튼.// -->
+    <h2>3. Checkbox</h2>
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el : '#app',
+      data : {
+        mymessage : '',
+        mymessage2 : '',
+        mymessage3 : '',
+        checked : true,
+      },
+      methods : {
+        // 함수 정의 
+        onInputChange :function(){
+          this.mymessage = event.target.value
+        }
+      }
+    })
+
+
+  </script>
+</body>
+</html>

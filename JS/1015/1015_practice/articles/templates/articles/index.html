@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">Articles</h1>
+  <a href="{% url 'articles:create' %}">NEW</a>
+  <hr>
+  {% for article in articles %}
+    <p><b>작성자 : <a href="{% url 'accounts:profile' article.user.username %}">{{ article.user }}</a></b></p>
+    <p>글 번호: {{ article.pk }}</p>
+    <p>글 제목: {{ article.title }}</p>
+    <p>글 내용: {{ article.content }}</p>
+    <form action="{% url 'articles:like' article.pk %}" data-articleId= "{{article.pk}}" id = "form_like" method="POST" class="d-inline">
+      {% csrf_token %}
+      {% if user in article.like_users.all %}
+        <button class="btn btn-link">
+          <i class="fas fa-heart fa-lg heart-{{article.pk}}" style="color:crimson;"></i>
+        </button>
+      {% else %}
+        <button class="btn btn-link ">
+          <i class="fas fa-heart fa-lg heart-{{article.pk}}" style="color:black;"></i>
+        </button>
+      {% endif %}
+    </form>
+   
+    <span id ="like_count-{{article.pk}}">{{ article.like_users.all|length }} </span>명이 이 글을 좋아합니다.<br>
+    
+    <a href="{% url 'articles:detail' article.pk %}">[detail]</a>
+    <hr>
+  {% endfor %}
+{% endblock %}
+
+{% block script %}
+  <script> 
+    // 좋아요 버튼을 클릭하면 하트 색이 변하고 숫자가 증가한다.
+    // 1. 좋아요 하트를 클릭 (이벤트)
+    // 2. 하트의 색이 변함 (결과)
+    // 3. 숫자가 변함 (결과)
+    const likeBtnForm = document.querySelectorAll('#form_like')
+    likeBtnForm.forEach(likeBtnForm => {
+      const articleId = likeBtnForm.dataset.articleid
+      likeBtnForm.addEventListener('click', function (event) {
+        event.preventDefault()
+        // console.log('here')
+        // 좋아요 요청 주소
+
+        const csrfToken = document.querySelector('input[name=csrfmiddlewaretoken]').value
+        const options = { headers: {'X-CSRFToken': csrfToken}}
+
+        const API_URL = `/articles/${articleId}/like/`
+        axios.post(API_URL, {}, options)
+          .then(res => {
+            // console.log(res.data)
+            const { is_like, like_count } = res.data // ex {'is_like' :true}
+
+            // 하트 가져오기
+            const likeHeart = document.querySelector(`.heart-${articleId}`)
+            likeHeart.style.color = is_like ? 'crimson' : 'black'
+            const likeCount = document.querySelector(`#like_count-${articleId}`)
+            likeCount.innerText = like_count
+            // likeCount.inner
+          })
+          .catch(err=>{
+            console.error(err)
+          })
+      })
+    })
+  </script>
+  
+{% endblock  %}
