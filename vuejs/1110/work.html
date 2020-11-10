@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<!-- 
+  1. 아이템추가
+  2. 완료된 일 체크 및 취소선 생성 기능
+  3. 완료된 일 지우기
+  4. 할일 필터링
+  5. 
+ -->
+<body>
+  <div id='app'>
+    <select v-model='apt'>
+      <!-- on event -->
+      <option value="all">전체</option>
+      <option value="ing">진행중</option>
+      <option value="completed">완료</option>
+    </select>
+    <input type="text" v-model="userInput" @keydown.enter="addTodo">
+    <button @click='addBtn'>+</button>
+    <br>
+    <br>
+    <!-- todo list -->
+    <div v-for='todo in aptlist' :value='todo' :key='todo.id'>
+      <input @change='check(todo)' type="checkbox" :checked="todo.isCompleted" >
+      <span :class="{completed: todo.isCompleted}">{{todo.content}}</span>
+
+      <br>
+    </div>
+    <!-- list 제거 -->
+      <button @click='remove'>완료된 할 일 지우기</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      // local storage
+      const TODO_STORAGE_KEY = 'TODO_STORAGE_KEY'
+      const todoStorage = {
+        fetch(){
+          const listJson = localStorage.getItem(TODO_STORAGE_KEY)
+          return JSON.parse(listJson)
+        },
+        save(list){
+          const listJson = JSON.stringify(list)
+          localStorage.setItem(TODO_STORAGE_KEY,listJson)
+        },
+      }
+
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+          userInput: "",
+          apt :'all', 
+          list: [], //
+        },
+        computed : {
+          aptlist() {
+            if (this.apt==='completed'){
+              return this.list.filter( todo => {
+                return todo.isCompleted
+              })
+            } else if(this.apt ==='ing'){
+              return this.list.filter(todo=>{
+                return !todo.isCompleted
+              })
+            } else {
+              return this.list
+            }
+          },
+        },
+        methods: {
+          addTodo(){
+            const todo = {
+              id: new Date().getMilliseconds(),
+              content : this.userInput,
+              isCompleted : false,
+            }
+            this.list.push(todo)
+          },
+          onChange() {
+            this.apt = value
+            console.log(this.apt)
+          },
+          // 1. button 눌러있을 때 인풋 내용이 li로 들어가기
+          addBtn(event) {
+            // console.log('A')
+            const todo = {
+              id: new Date().getMilliseconds(),
+              content : this.userInput,
+              isCompleted : false,
+            }
+            this.list.push(todo)
+
+          },
+          check(todo){
+           todo.isCompleted = !todo.isCompleted // 참이면 거짓으로 | 거짓이면 참으로 
+          },
+          remove(){
+            // 상태 속성이 '완료'인 것을 뽑아서 반환
+            const newTodoList = this.list.filter(todo => {
+              return !todo.isCompleted
+            })
+            this.list = newTodoList
+          } 
+        },
+        watch : {
+          list: {
+            handler(newV,oldV){
+              todoStorage.save(newV)
+            },
+            deep : true,
+          },
+        },
+        created(){
+          this.list = todoStorage.fetch()
+        },
+      })
+    </script>
+</body>
+
+</html>
