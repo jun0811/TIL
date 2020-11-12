@@ -25,5 +25,5 @@
 
 ### 3. Vue Life Cycle Hook을 참고하여, 다음 Vue application을 실행했을 때
 
-- created 안에있는 메시지가 출력
-
+- created 
+- mounted
